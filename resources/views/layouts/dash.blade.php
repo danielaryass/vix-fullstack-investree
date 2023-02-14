@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    @include('includes.meta')
+    @include('includes.backsite.meta')
     <title> @yield('title') | Investree Blog </title>
     @stack('before-style')
-    @include('includes.style')
+    @include('includes.backsite.style')
     @stack('after-style')
 
 </head>
@@ -45,7 +45,7 @@
         </div>
     </div>
     @stack('before-script')
-    @include('includes.script')
+    @include('includes.backsite.script')
     @stack('after-script')
 </body>
 

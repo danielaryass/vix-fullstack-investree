@@ -14,15 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.dashboard.index');
+    return view('pages.home.index');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
+// create group route for dashboard and middleware auth
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        return view('pages.dashboard.index');
+    });
 });
+
