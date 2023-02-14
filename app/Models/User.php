@@ -58,4 +58,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    // relasi ke tabel post
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    // relasi ke tabel category
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

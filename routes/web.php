@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// Controller yang digunakan
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,15 +15,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route untuk frontsite 
 Route::get('/', function () {
     return view('pages.home.index');
 });
 
-// create group route for dashboard and middleware auth
+// Route untuk backsite/dashboard dengan ketentuan user harus login terlebih dahulu
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', function () {
-        return view('pages.dashboard.index');
-    });
-});
+    Route::resource('dashboard', DashboardController::class);
+    Route::resource('post', PostController::class);
 
+});

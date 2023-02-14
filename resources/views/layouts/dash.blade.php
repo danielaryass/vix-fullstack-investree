@@ -4,9 +4,9 @@
 <head>
     @include('includes.backsite.meta')
     <title> @yield('title') | Investree Blog </title>
-    @stack('before-style')
+    @stack('before-styles')
     @include('includes.backsite.style')
-    @stack('after-style')
+    @stack('after-styles')
 
 </head>
 
@@ -20,11 +20,11 @@
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-            <div class="page-heading ">
-                <h3>@yield('title')</h3>
 
-                @yield('content')
-            </div>
+
+
+            @yield('content')
+
 
 
 
@@ -44,9 +44,9 @@
             </footer>
         </div>
     </div>
-    @stack('before-script')
+    @stack('before-scripts')
     @include('includes.backsite.script')
-    @stack('after-script')
+    @stack('after-scripts')
 </body>
 
 </html>
