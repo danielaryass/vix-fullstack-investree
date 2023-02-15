@@ -28,7 +28,7 @@
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Email"
-                                name="email" />
+                                name="email" value="{{ old('email') }}" />
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

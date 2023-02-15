@@ -33,34 +33,34 @@
                     <table class="table " id="table1">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>City</th>
-                                <th>Status</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Content</th>
+                                <th>Author</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Graiden</td>
-                                <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                <td>076 4820 8838</td>
-                                <td>Offenburg</td>
-                                <td>
-                                    <span class="badge bg-success">Active</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Nathaniel</td>
-                                <td>mi.Duis@diam.edu</td>
-                                <td>(012165) 76278</td>
-                                <td>Grumo Appula</td>
-                                <td>
-                                    <span class="badge bg-danger">Inactive</span>
-                                </td>
-                            </tr>
-
+                            @forelse($posts as $post)
+                                <tr>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->category->name }}</td>
+                                    <td>{{ $post->content }}</td>
+                                    <td>{{ $post->user->name }}</td>
+                                    <td>
+                                        <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ route('post.destroy', $post->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">No Data</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

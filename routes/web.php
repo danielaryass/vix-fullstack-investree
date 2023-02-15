@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 // Controller yang digunakan
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,6 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('post', PostController::class);
+    Route::resource('category', CategoryController::class);
 
 });

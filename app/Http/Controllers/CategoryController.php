@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
-// Panggil model yang akan digunakan
-use App\Models\Post;
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('pages.backsite.post.index', compact('posts'));
+        $category = Category::all();
+        dd($category);
+        return view('pages.backsite.category.index');
     }
 
     /**
@@ -28,8 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('pages.backsite.post.create', compact('categories'));
+        return view('pages.backsite.category.create');
     }
 
     /**
@@ -40,25 +38,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_id' => 'required',
-        ]);
-        
-        
-        $data['image'] = isset($data['image']) ? $request->file('image')->store('assets/image-post', 'public') : "";
+        $category = new Category;
+        $category->name = $request->name;
+        $category->user_id = Auth::user()->id;
+        $category->save();
 
-        $post = new Post;
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->image = $data['image'];
-        $post->category_id = $request->category_id;
-        $post->user_id = auth()->user()->id;
-        $post->save();
+        return redirect()->route('category.index')->with('success', 'Category created successfully.');
 
-        return redirect()->route('post.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -103,8 +89,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
-        $post->delete();
-        return redirect()->route('post.index')->with('success', 'Post deleted successfully.');
+        //
     }
 }
