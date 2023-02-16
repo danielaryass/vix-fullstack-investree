@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,7 @@ use App\Http\Controllers\CategoryController;
 |
 */
 // Route untuk frontsite 
-Route::get('/', function () {
-    return view('pages.home.index');
-});
+Route::resource('/', BlogController::class);
 
 // Route untuk backsite/dashboard dengan ketentuan user harus login terlebih dahulu
 Route::group(['middleware' => 'auth'], function () {

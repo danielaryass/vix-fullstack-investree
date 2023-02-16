@@ -24,9 +24,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-primary ml-lg-2" href="{{ route('login') }}">Login</a>
-                </li>
+                @guest
+                    <li class="nav-item">
+                        <a class="btn btn-primary ml-lg-2" href="{{ route('login') }}">Login</a>
+                    </li>
+                @endguest
+                @auth
+                    <li class="nav-item">
+                        <a class="btn btn-primary ml-lg-2" href="{{ route('dashboard.index') }}">Dashboard</a>
+                    </li>
+                @endauth
             </ul>
         </div>
 
