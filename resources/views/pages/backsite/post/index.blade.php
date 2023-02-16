@@ -48,7 +48,7 @@
                                     <td><img src="{{ url(Storage::url($post->image)) }}" alt="Post Image" height="100px">
                                     </td>
                                     <td>{{ $post->category->name }}</td>
-                                    <td>{!! $post->content !!}</td>
+                                    <td class="col-lg-4">{!! limit_words($post->content, 50) !!}</td>
                                     <td>{{ $post->user->name }}</td>
                                     <td>
                                         <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary">Edit</a>

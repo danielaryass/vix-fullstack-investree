@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="col-lg-10 col-9">
                                         <input type="text" id="name" class="form-control" name="name"
-                                            placeholder="name" value="{{ old('name') }}" />
+                                            placeholder="Name" value="{{ old('name') }}" />
                                     </div>
                                 </div>
                             </div>
@@ -61,8 +61,8 @@
                                 <button type="submit" class="btn btn-primary me-1 mb-1">
                                     Submit
                                 </button>
-                                <a href="{{ route('post.index') }}" class="btn btn-light-secondary me-1 mb-1">
-                                    Reset
+                                <a href="{{ route('category.index') }}" class="btn btn-light-secondary me-1 mb-1">
+                                    Cancel
                                 </a>
                             </div>
                         </form>

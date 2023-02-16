@@ -121,7 +121,7 @@
                                     Submit
                                 </button>
                                 <a href="{{ route('post.index') }}" class="btn btn-light-secondary me-1 mb-1">
-                                    Reset
+                                    Cancel
                                 </a>
                             </div>
                         </form>

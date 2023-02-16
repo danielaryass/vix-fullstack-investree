@@ -1,5 +1,5 @@
 @extends('layouts.dash')
-@section('title', 'Create Post')
+@section('title', 'Edit Category')
 @section('content')
     @push('after-styles')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
@@ -19,7 +19,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last mb-5">
-                    <h3>Create New Post</h3>
+                    <h3>Edit Category</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -28,7 +28,7 @@
                                 <a href="{{ route('dashboard.index') }}">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Create New Post
+                                Edit Category
                             </li>
                         </ol>
                     </nav>
@@ -38,85 +38,30 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Create New Post</h4>
+                    <h4 class="card-title">Edit Category</h4>
                 </div>
                 <div class="card-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <div class="row">
-                        <form class="form form-horizontal" action="{{ route('post.store') }}" method="POST"
-                            enctype="multipart/form-data">
-
+                        <form class="form form-horizontal" action="{{ route('category.update', $category->id) }}"
+                            method="POST" enctype="multipart/form-data">
+                            @method('PUT')
                             @csrf
                             <div class="col-md-12">
                                 <div class="form-group row align-items-center">
                                     <div class="col-lg-2 col-3">
-                                        <label class="col-form-label">Title</label>
+                                        <label class="col-form-label">Name</label>
                                     </div>
                                     <div class="col-lg-10 col-9">
-                                        <input type="text" id="title" class="form-control" name="title"
-                                            placeholder="Title" value="{{ old('title') }}" />
+                                        <input type="text" id="name" class="form-control" name="name"
+                                            placeholder="Name" value="{{ $category->name ?? old('name') }}" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group row align-items-center">
-                                    <div class="col-lg-2 col-3">
-                                        <label class="col-form-label">Content</label>
-                                    </div>
-                                    <div class="col-lg-10 col-9">
-                                        <textarea name="content" class="form-control ckeditor-5" id="ckeditor5">{{ old('content') }} </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group row align-items-center">
-                                    <div class="col-lg-2 col-3">
-                                        <label class="col-form-label">Image</label>
-                                    </div>
-                                    <div class="col-lg-10 col-9">
-                                        <div class="custom-file">
-                                            <input type="file" class="form-control dropify" name="image" id="image"
-                                                data-allowed-file-extensions="png jpg jpeg" data-show-remove="false">
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group row align-items-center">
-                                    <div class="col-lg-2 col-3">
-                                        <label class="col-form-label">Category</label>
-                                    </div>
-                                    <div class="col-lg-10 col-9">
-                                        <select class="form-select" id="basicSelect" name="category_id">
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach
-
-                                        </select>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
                             <div class="col-sm-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">
                                     Submit
                                 </button>
-                                <a href="{{ route('post.index') }}" class="btn btn-light-secondary me-1 mb-1">
+                                <a href="{{ route('category.index') }}" class="btn btn-light-secondary me-1 mb-1">
                                     Cancel
                                 </a>
                             </div>

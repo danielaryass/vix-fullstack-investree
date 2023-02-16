@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::all()->sortByDesc('created_at');
         return view('pages.backsite.post.index', compact('posts'));
     }
 
@@ -73,7 +73,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        // return 404
+        abort(404);
     }
 
     /**
