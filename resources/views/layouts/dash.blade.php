@@ -21,7 +21,7 @@
                 </a>
             </header>
 
-
+            @include('sweetalert::alert')
 
             @yield('content')
 

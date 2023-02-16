@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+Use Alert;
 
 class PostController extends Controller
 {
@@ -48,17 +49,20 @@ class PostController extends Controller
         ]);
         
         
-        $data['image'] = isset($data['image']) ? $request->file('image')->store('assets/image-post', 'public') : "";
-
+  
         $post = new Post;
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->image = $data['image'];
+        $post->image = $request['image'];
         $post->category_id = $request->category_id;
         $post->user_id = auth()->user()->id;
+
+
+        $post['image'] = isset($post['image']) ? $request->file('image')->store('assets/image-post', 'public') : "";
         $post->save();
 
-        return redirect()->route('post.index')->with('success', 'Post created successfully.');
+        alert()->success('Success', 'Post created successfully.');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -78,10 +82,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        return view('pages.backsite.post.edit', compact('post', 'categories'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -90,9 +96,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+        $data['image'] = isset($data['image']) ? $request->file('image')->store('assets/image-post', 'public') : $post->image;
+        // delete image on storage
+        \Storage::disk('public')->delete($post->image);
+        $post->update($data);
+
+        alert()->success('Success', 'Post updated successfully.');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -101,10 +114,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
+        // delete on db and storage
+        // delete image on storage
+        \Storage::disk('public')->delete($post->image);
         $post->delete();
+
+        alert()->success('Success', 'Post deleted successfully.');
+
         return redirect()->route('post.index')->with('success', 'Post deleted successfully.');
     }
 }

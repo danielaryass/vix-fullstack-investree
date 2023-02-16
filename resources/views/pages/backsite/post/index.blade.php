@@ -34,6 +34,7 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Image</th>
                                 <th>Category</th>
                                 <th>Content</th>
                                 <th>Author</th>
@@ -44,16 +45,18 @@
                             @forelse($posts as $post)
                                 <tr>
                                     <td>{{ $post->title }}</td>
+                                    <td><img src="{{ url(Storage::url($post->image)) }}" alt="Post Image" height="100px">
+                                    </td>
                                     <td>{{ $post->category->name }}</td>
-                                    <td>{{ $post->content }}</td>
+                                    <td>{!! $post->content !!}</td>
                                     <td>{{ $post->user->name }}</td>
                                     <td>
                                         <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary">Edit</a>
                                         <form action="{{ route('post.destroy', $post->id) }}" method="POST"
-                                            class="d-inline">
+                                            class="d-inline" id="delete-form">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger" id="delete-button">Delete</button>
                                         </form>
                                 </tr>
                             @empty
@@ -67,12 +70,42 @@
             </div>
         </section>
     </div>
+
 @endsection
 @push('after-styles')
     <link rel="stylesheet" href="{{ asset('/backsite/assets/extensions/simple-datatables/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('/backsite/assets/css/pages/simple-datatables.css') }}" />
 @endpush
+
 @push('after-scripts')
     <script src="{{ asset('/backsite/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('/backsite/assets/js/pages/simple-datatables.js') }}"></script>
+    <script src="{{ url('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
+    <!-- Tambahkan kode JavaScript berikut pada bagian bawah halaman view -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Mendapatkan element tombol "Hapus"
+        var deleteButton = document.getElementById("delete-button");
+        // Menambahkan event listener pada tombol "Hapus"
+        deleteButton.addEventListener("click", function(e) {
+            // Mencegah tindakan default (pengiriman form) ketika tombol "Hapus" ditekan
+            e.preventDefault();
+            // Menampilkan SweetAlert
+            Swal.fire({
+                title: "Are you sure to delete this post?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                // Mengirimkan form jika tombol "Ya, hapus data" ditekan
+                if (result.isConfirmed) {
+                    document.getElementById("delete-form").submit();
+                }
+            });
+        });
+    </script>
 @endpush
