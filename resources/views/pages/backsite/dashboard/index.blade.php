@@ -35,9 +35,9 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                             <h6 class="text-muted font-semibold">
-                                                Profile Views
+                                                User Blog
                                             </h6>
-                                            <h6 class="font-extrabold mb-0">112.000</h6>
+                                            <h6 class="font-extrabold mb-0">{{ $user }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -53,8 +53,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                            <h6 class="text-muted font-semibold">Followers</h6>
-                                            <h6 class="font-extrabold mb-0">183.000</h6>
+                                            <h6 class="text-muted font-semibold">User Blog</h6>
+                                            <h6 class="font-extrabold mb-0">{{ $user }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -104,8 +104,8 @@
                                     <img src="assets/images/faces/1.jpg" alt="Face 1" />
                                 </div>
                                 <div class="ms-3 name">
-                                    <h5 class="font-bold">John Duck</h5>
-                                    <h6 class="text-muted mb-0">@johnducky</h6>
+                                    <h5 class="font-bold">{{ auth()->user()->name }}</h5>
+                                    <h6 class="text-muted mb-0">Beginner</h6>
                                 </div>
                             </div>
                         </div>

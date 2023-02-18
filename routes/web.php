@@ -18,7 +18,10 @@ use App\Http\Controllers\BlogController;
 |
 */
 // Route untuk frontsite 
-Route::resource('/', BlogController::class);
+Route::get('/', function () {
+    return redirect('/blog');
+});
+Route::resource('/blog', BlogController::class);
 
 // Route untuk backsite/dashboard dengan ketentuan user harus login terlebih dahulu
 Route::group(['middleware' => 'auth'], function () {

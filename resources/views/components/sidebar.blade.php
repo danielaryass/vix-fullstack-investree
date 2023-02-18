@@ -67,10 +67,17 @@
                               <span>Category</span>
                           </a>
                       </li>
+                      <li
+                          class="sidebar-item {{ request()->is('category') || request()->is('category/*') ? 'active' : '' }}">
+                          <a href="{{ route('blog.index') }}" class="sidebar-link" target="_blank">
+                              <i class="bi bi-house-door"></i>
+                              <span>Home Page</span>
+                          </a>
+                      </li>
 
                       <li class="sidebar-item has-sub">
                           <a href="#" class="sidebar-link">
-                              <i class="bi bi-stack"></i>
+                              <i class="bi bi-gear"></i>
                               <span>Setting</span>
                           </a>
                           <ul class="submenu">

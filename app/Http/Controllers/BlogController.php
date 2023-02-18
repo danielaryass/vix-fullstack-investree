@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use post
+// Model yang dipakai dalam controller ini
 use App\Models\Post;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
@@ -49,7 +50,11 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        // model post with category and user
+        $post = Post::with(['category', 'user'])->findOrFail($id);
+        $categories = Category::all();
+        $posts = Post::with(['category', 'user'])->latest()->paginate(3);
+        return view('pages.frontsite.blog.show', compact('post', 'categories', 'posts'));
     }
 
     /**
