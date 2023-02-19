@@ -21,7 +21,7 @@
                             <div class="meta-header">
                                 <div class="post-author">
                                     <div class="avatar">
-                                        <img src="../assets/img/person/person_1.jpg" alt="">
+                                        <img src="{{ asset('/frontsite/assets/img/profile.png') }}" alt="">
                                     </div>
                                     by <a href="#">{{ $post->user->name }}</a>
                                 </div>

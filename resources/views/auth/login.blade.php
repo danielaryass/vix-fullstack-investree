@@ -17,8 +17,8 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="{{ asset('/backsite/assets/images/logo/logo.svg') }}"
-                                alt="Logo" /></a>
+                        <a href="{{ route('blog.index') }}"><img
+                                src="{{ asset('/frontsite/assets/img/inv_logo.webp') }}" alt="Logo" /></a>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">
