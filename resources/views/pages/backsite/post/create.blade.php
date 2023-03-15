@@ -82,9 +82,10 @@
                                         <label class="col-form-label">Image</label>
                                     </div>
                                     <div class="col-lg-10 col-9">
+                                        <img class="img-preview" src="" alt="" style="width:300px;">
                                         <div class="custom-file">
-                                            <input type="file" class="form-control dropify" name="image" id="image"
-                                                data-allowed-file-extensions="png jpg jpeg" data-show-remove="false">
+                                            <input type="file" class="form-control-file" id="photo"
+                                                                name="photo" onchange="previewImage()">
 
                                         </div>
 
@@ -129,6 +130,17 @@
     </div>
 @endsection
 @push('after-scripts')
+<script>
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(photo.files[0]);
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+</script>
     <script src="{{ asset('/backsite/assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
     <script src="{{ asset('/backsite/assets/js/pages/form-element-select.js') }}"></script>
     <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js') }}"></script>
